@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             val cost = etCost.text.toString().toInt()
 
             val result = omset - cost
-            tvResult.text = "Hasil: IDR " + result.toString() +",-"
+            tvResult.text = "Profit: IDR " + result.toString() +",-"
         }
     }
 }
