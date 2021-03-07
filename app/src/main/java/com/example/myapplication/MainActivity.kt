@@ -3,24 +3,31 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val etOmset = findViewById<TextView>(R.id.etOmset)
-        val etCost = findViewById<TextView>(R.id.etCost)
-        val btnHitung = findViewById<TextView>(R.id.btnHitung)
-        val tvResult = findViewById<TextView>(R.id.tvResult)
+        val bind = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(bind.root)
 
-        btnHitung.setOnClickListener {
-            val omset = etOmset.text.toString().toInt()
-            val cost = etCost.text.toString().toInt()
+        bind.btnHitung.setOnClickListener {
+            // validation
+            if (bind.etOmset.text.isEmpty() || bind.etCost.text.isEmpty()) {
+                Toast.makeText(this, "Harap isi formulir dengan benar!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val omset = bind.etOmset.text.toString().toInt()
+            val cost = bind.etCost.text.toString().toInt()
 
             val result = omset - cost
-            tvResult.text = "Profit: IDR " + result.toString() +",-"
+            bind.tvResult.text = "Profit: IDR " + result.toString() +",-"
         }
     }
 }
